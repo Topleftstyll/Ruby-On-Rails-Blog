@@ -1,5 +1,3 @@
-
-
 <h1>Title: <%= @article.title %></h1>
 <p>Text: <%= @article.body %></p>
 
@@ -19,7 +17,23 @@
         <strong>Comment:</strong>
         <%= comment.body %>
     </p>
+
+    <%= link_to 'Destroy Comment', [comment.article, comment],
+           method: :delete,
+           data: { confirm: 'Are you sure?' } %>
 <% end %>
 
 <h2>Add a comment: </h2>
-<%= render "comment_form", article: @article %>
+<%= form_with model: [ @article, @article.comments.build ] do |form| %>
+    <p>
+        <%= form.label :commenter %><br>
+        <%= form.text_field :commenter %>
+    </p>
+    <p>
+        <%= form.label :body %><br>
+        <%= form.text_field :body %>
+    </p>
+    <p>
+        <%= form.submit %><br>
+    </p>
+<% end %>
