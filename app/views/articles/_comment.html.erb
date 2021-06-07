@@ -1,0 +1,18 @@
+<% comments.each do |comment|%>
+    <div class="card" style="margin-top: 20px">
+        <div class="card-body">
+            <div class="d-flex flex-row justify-content-between">
+                <h4><%= comment.commenter %></h4>
+
+                <h2>
+                    <%= link_to [comment.article, comment], method: :delete, data: { confirm: 'Are you sure?' }, class: "text-secondary text-decoration-none" do %>
+                        <%= fa_icon "trash" %>
+                    <% end %>
+                </h2>
+            </div>
+            <p class="text-muted">
+                <%= comment.body %>
+            </p>
+        </div>
+    </div>
+<% end %>

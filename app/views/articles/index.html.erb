@@ -1,11 +1,22 @@
-<h1>Articles</h1>
+<div class="container mt-5">
+    <div class="d-flex flex-row justify-content-between">
+        <h1>Articles</h1>
+        <div class="text-center">
+            <%= link_to "New Article", new_article_path, class: "btn btn-primary" %>
+        </div>
+    </div>
 
-<ul>
-    <% @articles.each do |article| %>
-        <li>
-            <%= link_to article.title, article %>
-        </li>
-    <% end %>
-</ul>
-
-<%= link_to "New Article", new_article_path %>
+    <div class="row justify-content-start">
+        <% @articles.each do |article| %>
+            <div class="col-3 w-full" style="margin-bottom: 20px">
+                <div class="card" style="width: 100%">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= article.title %></h5>
+                        <p class="card-text"><%= article.body %></p>
+                        <%= link_to 'Read More', article, class: "btn btn-outline-primary" %>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>

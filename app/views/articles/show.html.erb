@@ -1,39 +1,30 @@
-<h1>Title: <%= @article.title %></h1>
-<p>Text: <%= @article.body %></p>
+<div class="container mt-5">
+    <div class="d-flex flex-row justify-content-between">
+        <h1><%= @article.title %></h1>
+        <div class="d-flex flex-row align-self-center">
+            <h1 class="align-self-center m-auto">
+                <%= link_to edit_article_path(@article), class: "text-secondary text-decoration-none" do %>
+                    <%= fa_icon "edit" %>
+                <% end %>
+            </h1>
 
-<%= link_to "All Articles", articles_path %> |
-<%= link_to "Edit", edit_article_path(@article) %> |
-<%= link_to "Destroy", article_path(@article), method: :delete, data: { confirm: 'Are you sure?' } %>
+            <h1 class="align-self-center" style="margin-left: 20px">
+                <%= link_to article_path(@article),
+                    method: :delete,
+                    data: { confirm: "Are you sure?" },
+                    class: "text-secondary text-decoration-none" do %>
 
+                    <% fa_icon "trash" %>
+                <% end %>
+            </h1>
+        </div>
+    </div>
+    
+    <p class="text-muted"><%= @article.body %></p>
 
-<h2>Comments</h2>
-<% @article.comments.each do |comment|%>
-    <p>
-        <strong>Commenter:</strong>
-        <%= comment.commenter %>
-    </p>
+    <h3 style="margin-top: 40px">Comments</h2>
+    <%= render 'comment', comments: @article.comments %>
 
-    <p>
-        <strong>Comment:</strong>
-        <%= comment.body %>
-    </p>
-
-    <%= link_to 'Destroy Comment', [comment.article, comment],
-           method: :delete,
-           data: { confirm: 'Are you sure?' } %>
-<% end %>
-
-<h2>Add a comment: </h2>
-<%= form_with model: [ @article, @article.comments.build ] do |form| %>
-    <p>
-        <%= form.label :commenter %><br>
-        <%= form.text_field :commenter %>
-    </p>
-    <p>
-        <%= form.label :body %><br>
-        <%= form.text_field :body %>
-    </p>
-    <p>
-        <%= form.submit %><br>
-    </p>
-<% end %>
+    <h2 style="margin-top: 40px">Add a comment</h2>
+    <%= render 'comments/form', article: @article %>
+</div>

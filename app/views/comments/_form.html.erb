@@ -1,0 +1,17 @@
+<%= form_with model: [ article, article.comments.build ] do |form| %>
+    <div class="card">
+        <div class="card-body">
+            <p>
+                <%= form.label :commenter, class: 'form-label' %><br>
+                <%= form.text_field :commenter, class: 'form-control' %>
+            </p>
+            <p>
+                <%= form.label :body, class: 'form-label' %><br>
+                <%= form.text_area :body, class: 'form-control' %>
+            </p>
+            <p>
+                <%= form.submit 'Add Comment', class: 'btn btn-primary' %><br>
+            </p>
+        </div>
+    </div>
+<% end %>
